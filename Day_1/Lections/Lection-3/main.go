@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"math"
+)
 
 func main() {
 	// Деление
@@ -28,4 +31,8 @@ func main() {
 	// Операция взятия остатка
 	newCheck := int(check) % 3
 	fmt.Println("Остаток от деления check на 3 =", newCheck)
+
+	// Операция возведения в степень
+	total := math.Pow(2, 10)
+	fmt.Printf("total = %.3f\n", total)
 }
