@@ -13,7 +13,7 @@ func main() {
 
 	var hundreds = number / 100
 	var dozens = (number - hundreds*100) / 10
-	var digits = number - hundreds*100 - dozens*10
+	var digits = number % 10
 
 	fmt.Println("Первая цифра числа:", hundreds)
 	fmt.Println("Вторая цифра числа:", dozens)
