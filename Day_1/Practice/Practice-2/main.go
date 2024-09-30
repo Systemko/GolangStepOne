@@ -12,7 +12,7 @@ func main() {
 	fmt.Scan(&number)
 
 	var hundreds = number / 100
-	var dozens = (number - hundreds*100) / 10
+	var dozens = number / 10 % 10
 	var digits = number % 10
 
 	fmt.Println("Первая цифра числа:", hundreds)
