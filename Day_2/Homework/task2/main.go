@@ -27,4 +27,48 @@ In: 5 5 5 5 5     Out: CONSTANT
 
 package main
 
-// Ваш код
+import (
+    "fmt"
+)
+
+func main() {
+    var digits [5]int
+    
+    fmt.Print("Введите последовательность из 5 чисел через пробел: ")
+
+    fmt.Scan(&digits[0], &digits[1], &digits[2], &digits[3], &digits[4])
+
+    var flags byte
+
+    for i := 0; i < len(digits) - 1; i++ {
+        digit1 := digits[i]
+        digit2 := digits[i + 1]
+        
+        if digit1 < digit2 {
+            flags |= 1
+        } else if digit1 > digit2 {
+            flags |= 2
+        } else {
+            flags |= 4
+        }
+    }
+    
+    var result string
+    
+    switch flags {
+    case 1:
+        result = "ASCENDING"
+    case 2:
+        result = "DESCENDING"
+    case 4:
+        result = "CONSTANT"
+    case 5:
+        result = "WEAKLY ASCENDING"
+    case 6:
+        result = "WEAKLY DESCENDING"
+    default:
+        result = "RANDOM"
+    }
+    
+    fmt.Print(result)
+}
