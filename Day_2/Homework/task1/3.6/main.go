@@ -6,32 +6,31 @@
 package main
 
 import (
-    "fmt"
-    //"strings"
-    "strconv"
+	"fmt"
+	"strconv"
+	"strings"
 )
 
 func main() {
-    var 
-    (
-        number int64
-        digits string
-        sum int64
-    )
-    
-    fmt.Print("Введите натуральное число: ")
-    fmt.Scanf("%d", &number)
-    
-    stringNumber := fmt.Sprintf("%d", number)
-    
-    for i := 0; i < len(stringNumber); i++ {
-        symbol := string(stringNumber[i])
-        digit, _ := strconv.ParseInt(symbol, 10, 64)
-        digits += fmt.Sprintf("%d + ", digit)
-        sum += digit
-    }
+	var (
+		number int64
+		digits string
+		sum    int64
+	)
 
-    digits, _ = strings.CutPrefix(digits, " + ")
+	fmt.Print("Введите натуральное число: ")
+	fmt.Scanf("%d", &number)
 
-    fmt.Println(digits, "=", sum)
+	stringNumber := fmt.Sprintf("%d", number)
+
+	for i := 0; i < len(stringNumber); i++ {
+		symbol := string(stringNumber[i])
+		digit, _ := strconv.ParseInt(symbol, 10, 64)
+		digits += fmt.Sprintf("%d + ", digit)
+		sum += digit
+	}
+
+	digits, _ = strings.CutPrefix(digits, " + ")
+
+	fmt.Println(digits, "=", sum)
 }
