@@ -65,7 +65,7 @@ func main() {
 			fmt.Println("Пароль принят")
 			break
 		} else {
-			fmt.Println(error.Error())
+			fmt.Println(error.Error(), "|", "Осталось попыток:", tryCount-count-1)
 		}
 
 		count++
