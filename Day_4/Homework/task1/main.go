@@ -28,7 +28,6 @@ import (
 	"os"
 	"regexp"
 	"strings"
-	//"errors"
 )
 
 type Address struct {
@@ -120,20 +119,22 @@ func (invoice *Invoice) PrintInvoice() {
 
 func readCustomer() (*Customer, bool) {
 	var readFlag bool = true
+	var fullname, phone string
+	var address *Address
 
-	fullname, readFlag := readParameter(
+	fullname, readFlag = readParameter(
 		readFlag,
 		"Введите ФИО",
 		"ФИО должно содержать не менее двух слов и состоять только из букв",
 		isCustomerNameValid)
 
-	phone, readFlag := readParameter(
+	phone, readFlag = readParameter(
 		readFlag,
 		"Введите номер телефона в формате XXXXXXXXXX (10 цифр)",
 		"Номер телефона должен состоять только из цифр",
 		isCustomerPhoneValid)
 
-	address, readFlag := readAddress()
+	address, readFlag = readAddress()
 
 	if readFlag {
 		return newCustomer(fullname, phone, address), true
@@ -144,28 +145,29 @@ func readCustomer() (*Customer, bool) {
 
 func readAddress() (*Address, bool) {
 	var readFlag bool = true
+	var postalCode, city, street, building, flat string
 
-	postalCode, readFlag := readParameter(
+	postalCode, readFlag = readParameter(
 		readFlag,
 		"Введите почтовый индекс XXXXXX (6 цифр)",
 		"Почтовый индекс должен состоять только из цифр",
 		isPostalCodeValid)
-	city, readFlag := readParameter(
+	city, readFlag = readParameter(
 		readFlag,
 		"Введите город (только буквы)",
 		"Наименование города должно состоять только из букв",
 		isOnlyLetters)
-	street, readFlag := readParameter(
+	street, readFlag = readParameter(
 		readFlag,
 		"Введите улицу (только буквы)",
 		"Наименование улицы должно состоять только из букв",
 		isOnlyLetters)
-	building, readFlag := readParameter(
+	building, readFlag = readParameter(
 		readFlag,
 		"Введите номер дома (только цифры)",
 		"Номер дома должен состоять только из цифр",
 		isOnlyDigits)
-	flat, readFlag := readParameter(
+	flat, readFlag = readParameter(
 		readFlag,
 		"Введите номер квартиры (только цифры)",
 		"Номер квартры должен состоять только из цифр",
@@ -180,14 +182,15 @@ func readAddress() (*Address, bool) {
 
 func readInvoice(customer *Customer) (*Invoice, bool) {
 	var readFlag bool = true
+	var itemName, quantity string
 
-	itemName, readFlag := readParameter(
+	itemName, readFlag = readParameter(
 		readFlag,
 		"Введите наименование товара (от 1 до 100 символов)",
 		"Наименование товара должно состоять только из букв.",
 		isItemNameValid)
 
-	quantity, readFlag := readParameter(
+	quantity, readFlag = readParameter(
 		readFlag,
 		"Введите количество (только цифры)",
 		"Количество должно состоять только из цифр",
@@ -206,11 +209,11 @@ func readParameter(
 	error string,
 	check func(string) bool) (string, bool) {
 
-	reader := bufio.NewReader(os.Stdin)
-
 	if !readFlag {
 		return "", false
 	}
+
+	reader := bufio.NewReader(os.Stdin)
 
 	for {
 		fmt.Printf("%s: ", question)
